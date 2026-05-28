@@ -1,59 +1,34 @@
 (function () {
   'use strict';
 
-  var observer = new IntersectionObserver(
-    function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('visible');
-        }
-      });
-    },
-    { threshold: 0.1, rootMargin: '0px 0px -40px 0px' }
-  );
-
-  document.querySelectorAll('.anim-fade').forEach(function (el) {
-    observer.observe(el);
-  });
-
-  var nav = document.getElementById('nav');
-
-  function onScroll() {
-    if (window.scrollY > 50) {
-      nav.classList.add('scrolled');
-    } else {
-      nav.classList.remove('scrolled');
-    }
-  }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  onScroll();
-
   var toggle = document.getElementById('nav-toggle');
-  var mobileMenu = document.getElementById('mobile-menu');
+  var links = document.getElementById('nav-links');
 
-  if (toggle && mobileMenu) {
+  if (toggle && links) {
     toggle.addEventListener('click', function () {
-      toggle.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
+      var isOpen = links.classList.toggle('open');
+      toggle.setAttribute('aria-expanded', String(isOpen));
     });
 
-    mobileMenu.querySelectorAll('a').forEach(function (link) {
+    links.querySelectorAll('a').forEach(function (link) {
       link.addEventListener('click', function () {
-        toggle.classList.remove('active');
-        mobileMenu.classList.remove('open');
+        links.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
       });
     });
   }
 
   document.querySelectorAll('a[href^="#"]').forEach(function (anchor) {
-    anchor.addEventListener('click', function (e) {
-      var target = document.querySelector(this.getAttribute('href'));
-      if (target) {
-        e.preventDefault();
-        var top = target.getBoundingClientRect().top + window.scrollY - 80;
-        window.scrollTo({ top: top, behavior: 'smooth' });
+    anchor.addEventListener('click', function (event) {
+      var id = anchor.getAttribute('href');
+      var target = id && document.querySelector(id);
+
+      if (!target) {
+        return;
       }
+
+      event.preventDefault();
+      target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
 })();
