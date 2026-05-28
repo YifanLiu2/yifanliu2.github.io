@@ -170,12 +170,47 @@ strong {
   text-transform: uppercase;
 }
 
-.profile-links {
+.profile-icons {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 7px;
-  font-size: 0.94rem;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.profile-icon-link {
+  width: 36px;
+  height: 36px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--heading);
+  background: #ffffff;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+}
+
+.profile-icon-link:hover {
+  color: var(--link);
+  border-color: var(--border-strong);
+  background: var(--surface);
+  text-decoration: none;
+}
+
+.profile-icon-link svg {
+  width: 18px;
+  height: 18px;
+  fill: currentColor;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .profile-main {
@@ -295,10 +330,14 @@ h1 {
 
 .publication-figure {
   align-self: start;
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid var(--border);
-  background: var(--surface);
+  background: #ffffff;
   overflow: hidden;
+  padding: 10px;
+  min-height: 112px;
 }
 
 .publication-figure:hover {
@@ -309,6 +348,41 @@ h1 {
   width: 100%;
   height: auto;
   display: block;
+  background: #ffffff;
+  object-fit: contain;
+}
+
+.publication-placeholder-card {
+  width: 100%;
+  min-height: 92px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  color: var(--heading);
+  background:
+    linear-gradient(135deg, rgba(29, 78, 216, 0.08), transparent 55%),
+    linear-gradient(315deg, rgba(139, 30, 63, 0.08), transparent 55%),
+    #ffffff;
+  border: 1px solid var(--border);
+  text-align: center;
+}
+
+.publication-placeholder-card span {
+  font-family: var(--font-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.1;
+}
+
+.publication-placeholder-card small {
+  max-width: 140px;
+  color: var(--text-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 .publication-content {
