@@ -31,4 +31,19 @@
       target.scrollIntoView({ behavior: 'smooth', block: 'start' });
     });
   });
+
+  var contactStatus = document.getElementById('contact-status');
+
+  if (contactStatus && window.URLSearchParams) {
+    var params = new URLSearchParams(window.location.search);
+
+    if (params.get('contact') === 'sent') {
+      contactStatus.textContent = 'Thank you for reaching out. Your message has been sent.';
+      contactStatus.classList.add('is-success');
+
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', window.location.pathname + window.location.hash);
+      }
+    }
+  }
 })();
